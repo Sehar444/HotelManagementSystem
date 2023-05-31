@@ -1,0 +1,66 @@
+openapi: 3.0.0
+info:
+  title: Hotel-Management-System API
+  description: Rest API for Hotel
+  version: 1.0.0
+  contact:
+    email: wadeb@discorp.com
+
+tags:
+  - name: Guest
+    description: Endpoints for Guest
+
+paths:
+  /guest/list:
+    get:
+      tags:
+        - Guest
+      summary: Get list of guests
+      operationId: guestList
+      parameters:
+        - in: query
+          name: guestId
+          description: Unique reference of country record
+          required: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful retrieval
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GuestModel'
+  /guest/save:
+    post:
+      tags:
+        - Guest
+      summary: Endpoint to save guest
+      operationId: guestSave
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GuestModel'
+      responses:
+        '200':
+          description: Successful guest record has been saved or updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GuestModel'
+
+components:
+
+  schemas:
+    GuestModel:
+      type: object
+      properties:
+        guestId:
+          type: integer
+          format: int64
+        guestCnic:
+          type: integer
+          format: int64
+
